@@ -122,7 +122,7 @@ export default function HomePage() {
               <p className="mb-7 max-w-[500px] text-base leading-normal text-white/85 lg:mb-10 lg:text-xl">
                 Expert-guided trekking adventures through the Atlas, Sahara, and beyond
               </p>
-              <div className="flex flex-col gap-2.5 sm:flex-row sm:gap-3">
+              <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3">
                 <Link href="#offers" className={pillButton({ tone: "clay" })}>
                   Explore Our Treks
                   <ArrowRight aria-hidden />
@@ -211,8 +211,8 @@ export default function HomePage() {
 
         {/* Guide */}
         <section id="about" className="scroll-mt-20 bg-night py-[72px] text-white lg:scroll-mt-24 lg:py-[150px]">
-          <div className="shell flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-[110px]">
-            <div className="relative aspect-[600/740] w-full max-w-[600px] shrink-0 max-lg:mx-auto lg:w-[600px]">
+          <div className="shell flex flex-col gap-10 lg:flex-row lg:items-center lg:gap-16 xl:gap-[110px]">
+            <div className="relative aspect-[600/740] w-full max-w-[600px] shrink-0 max-lg:mx-auto lg:w-auto lg:flex-1">
               <div className="absolute left-0 top-0 h-[86.5%] w-[86.7%] overflow-hidden rounded-lg">
                 <Image
                   src="/img_guide/guide_26.jpg"
@@ -237,7 +237,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="lg:max-w-[570px]">
+            <div className="min-w-0 lg:max-w-[570px] lg:flex-1">
               <Eyebrow tone="light">Your guide</Eyebrow>
               <h2 className={cn(sectionTitle, "accent-light mb-5 mt-4 lg:mb-7 lg:mt-[22px]")}>
                 Meet Your Expert Guide <em>{siteConfig.guideName}</em>
@@ -262,7 +262,7 @@ export default function HomePage() {
                 ))}
               </ul>
 
-              <div className="flex flex-col gap-2.5 sm:flex-row sm:gap-3">
+              <div className="flex flex-col gap-2.5 sm:flex-row sm:flex-wrap sm:gap-3">
                 <a
                   href={whatsappUrl(generalInquiryMessage)}
                   target="_blank"
