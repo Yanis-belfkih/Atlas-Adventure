@@ -1,0 +1,118 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* Brand palette — "Haut Atlas éditorial": snow, night and Imlil clay, taken from the photos. */
+@theme {
+  --color-night: #121519;
+  --color-ink: #1a1d21;
+  --color-stone: #6b645c;
+  --color-stone-dark: #4a4540;
+  --color-snow: #f5f1ea;
+  --color-paper: #fcfaf6;
+  --color-sand: #e8dac5;
+  --color-sand-light: #efe5d6;
+  --color-clay: #b3502b;
+  --color-clay-dark: #8e3c1f;
+  --color-clay-light: #f3dfd3;
+  --color-peach: #f1c4a3;
+  --color-juniper: #23704a;
+  --color-juniper-dark: #1b5a3a;
+  --color-gold: #d39b4e;
+}
+
+/* shadcn/ui tokens, mapped onto the brand palette. */
+:root {
+  --background: #f5f1ea;
+  --foreground: #1a1d21;
+  --card: #fcfaf6;
+  --card-foreground: #1a1d21;
+  --popover: #fcfaf6;
+  --popover-foreground: #1a1d21;
+  --primary: #b3502b;
+  --primary-foreground: #ffffff;
+  --secondary: #efe5d6;
+  --secondary-foreground: #1a1d21;
+  --muted: #efe5d6;
+  --muted-foreground: #6b645c;
+  --accent: #f3dfd3;
+  --accent-foreground: #8e3c1f;
+  --destructive: #b42318;
+  --destructive-foreground: #b42318;
+  --border: rgb(26 29 33 / 0.12);
+  --input: rgb(26 29 33 / 0.18);
+  --ring: #b3502b;
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), Georgia, serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  ::selection {
+    background: var(--color-clay-light);
+    color: var(--color-clay-dark);
+  }
+}
+
+@layer components {
+  /* Page container: 1280px of content with 80px margins on a 1440px screen. */
+  .shell {
+    width: 100%;
+    max-width: 85rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 48rem) {
+    .shell {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  /* Italic accent word inside serif headings, e.g. "Majestic <em>Mountains</em>". */
+  .accent em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--color-clay);
+  }
+  .accent-light em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--color-peach);
+  }
+}
