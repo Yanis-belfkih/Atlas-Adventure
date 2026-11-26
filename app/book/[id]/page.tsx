@@ -175,7 +175,7 @@ export default async function BookingPage({ params }: BookingPageProps) {
                 src={offer.image}
                 alt={offer.name}
                 fill
-                preload
+                fetchPriority="high"
                 sizes="(max-width: 1024px) 100vw, 840px"
                 className="object-cover"
                 style={offer.imagePosition ? { objectPosition: offer.imagePosition } : undefined}
@@ -215,22 +215,25 @@ export default async function BookingPage({ params }: BookingPageProps) {
               <div
                 key={fact.label}
                 className={cn(
-                  "flex items-center gap-3 bg-paper p-4 lg:gap-3.5 lg:px-7 lg:py-6",
+                  // Only <dt>/<dd> may sit in a <dl> group, so the icon lives inside the <dt>,
+                  // positioned in the left padding (padding + icon size + gap).
+                  "relative flex min-h-[72px] min-w-0 flex-col justify-center bg-paper py-4 pl-[68px] pr-4 lg:min-h-[92px] lg:py-6 lg:pl-[86px] lg:pr-7",
                   index === facts.length - 1 && facts.length % 2 === 1 && "col-span-2 lg:col-span-1",
                 )}
               >
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sand-light text-clay lg:size-11">
-                  <fact.icon aria-hidden className="size-5" strokeWidth={1.75} />
-                </span>
-                <div className="min-w-0">
-                  <dt className="mb-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-stone lg:text-xs">
-                    {fact.label}
-                  </dt>
-                  <dd className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[15px] font-semibold lg:text-[17px]">
-                    {fact.value}
-                    {fact.meter && <DifficultyMeter difficulty={offer.difficulty} />}
-                  </dd>
-                </div>
+                <dt className="mb-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-stone lg:text-xs">
+                  <span
+                    aria-hidden
+                    className="absolute left-4 top-1/2 flex size-10 -translate-y-1/2 items-center justify-center rounded-full bg-sand-light text-clay lg:left-7 lg:size-11"
+                  >
+                    <fact.icon className="size-5" strokeWidth={1.75} />
+                  </span>
+                  {fact.label}
+                </dt>
+                <dd className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[15px] font-semibold lg:text-[17px]">
+                  {fact.value}
+                  {fact.meter && <DifficultyMeter difficulty={offer.difficulty} />}
+                </dd>
               </div>
             ))}
           </dl>

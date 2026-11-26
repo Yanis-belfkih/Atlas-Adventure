@@ -75,12 +75,12 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <p
+        {/* Decorative wordmark, drawn as generated content so contrast checkers don't treat it as text. */}
+        <div
           aria-hidden
-          className="mb-7 mt-14 whitespace-nowrap font-serif text-[clamp(52px,11.6vw,168px)] font-light leading-none tracking-[-0.04em] text-white/[0.07] lg:mb-9 lg:mt-20"
-        >
-          {siteConfig.name}
-        </p>
+          data-wordmark={siteConfig.name}
+          className="mb-7 mt-14 whitespace-nowrap font-serif text-[clamp(52px,11.6vw,168px)] font-light leading-none tracking-[-0.04em] text-white/[0.07] before:content-[attr(data-wordmark)] lg:mb-9 lg:mt-20"
+        />
 
         <div className="flex flex-col gap-2 border-t border-white/12 pt-7 text-sm text-white/50 md:flex-row md:justify-between">
           <p>

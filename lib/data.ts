@@ -58,8 +58,6 @@ export type Offer = {
   dailyItinerary?: DailyItineraryItem[]
   proTips?: string[]
   pricingTiers?: PricingTier[]
-  /** Solo travelers get a price on request instead of the first tier plus the solo supplement. */
-  soloOnRequest?: boolean
   note?: string
   specialFeatures?: SpecialFeature[]
 }

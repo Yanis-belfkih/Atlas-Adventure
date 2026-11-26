@@ -98,7 +98,7 @@ export default function HomePage() {
             src="/img_montagne/Montagne_hd_1.jpg"
             alt="A trekker on a snowy ridge of the High Atlas, below Mount Toubkal"
             fill
-            preload
+            fetchPriority="high"
             sizes="100vw"
             className="-z-10 object-cover object-[58%_center]"
           />

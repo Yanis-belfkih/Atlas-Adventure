@@ -134,7 +134,7 @@ function DailyItinerary({ days }: { days: DailyItineraryItem[] }) {
             <li key={day.day} className="flex gap-4 md:gap-7">
               <div className="flex w-14 shrink-0 flex-col items-center md:w-[72px]">
                 <div className="flex size-14 flex-col items-center justify-center rounded-full bg-clay text-white md:size-[72px]">
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.14em] opacity-80 md:text-[11px]">Day</span>
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.12em] md:text-xs">Day</span>
                   <span className="font-serif text-[22px] leading-none md:text-[26px]">{day.day}</span>
                 </div>
                 {!isLast && <div aria-hidden className="my-2.5 w-px flex-1 bg-clay/35" />}

@@ -33,11 +33,9 @@ export function BookingForm({ offer }: { offer: Offer }) {
 
   const tiers = sortedTiers(offer)
   const pricePerPerson = getPricePerPerson(offer, participants)
-  const totalPrice = pricePerPerson === null ? null : pricePerPerson * participants
+  const totalPrice = pricePerPerson * participants
   const isSolo = tiers.length > 0 && participants < tiers[0].people
-  const hasSoloSupplement = isSolo && !offer.soloOnRequest
   const activeTier = tiers.filter((tier) => tier.people <= participants).at(-1)
-  const showPrice = (amount: number | null) => (amount === null ? "On request" : formatPrice(amount))
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -53,9 +51,9 @@ export function BookingForm({ offer }: { offer: Offer }) {
       "",
       `Date: ${format(date, "MMMM d, yyyy")}`,
       `Participants: ${participants}`,
-      `Price per person: ${showPrice(pricePerPerson)}`,
-      `Total price: ${showPrice(totalPrice)}`,
-      ...(hasSoloSupplement
+      `Price per person: ${formatPrice(pricePerPerson)}`,
+      `Total price: ${formatPrice(totalPrice)}`,
+      ...(isSolo
         ? [`Note: includes the solo traveler supplement (${formatPrice(siteConfig.pricing.soloSupplement)}).`]
         : []),
       `Fitness level: ${fitnessLevel || "Not specified"}`,
@@ -109,14 +107,8 @@ export function BookingForm({ offer }: { offer: Offer }) {
               isSolo && "bg-clay-light py-2.5 font-semibold text-clay-dark",
             )}
           >
-            {offer.soloOnRequest ? (
-              "Solo travelers: price on request"
-            ) : (
-              <>
-                Solo travelers: {formatPrice(tiers[0].pricePerPerson + siteConfig.pricing.soloSupplement)} (includes{" "}
-                {formatPrice(siteConfig.pricing.soloSupplement)} supplement)
-              </>
-            )}
+            Solo travelers: {formatPrice(tiers[0].pricePerPerson + siteConfig.pricing.soloSupplement)} (includes{" "}
+            {formatPrice(siteConfig.pricing.soloSupplement)} supplement)
           </p>
         </div>
       )}
@@ -131,7 +123,7 @@ export function BookingForm({ offer }: { offer: Offer }) {
               <button
                 ref={dateButtonRef}
                 type="button"
-                aria-labelledby="date-label"
+                aria-labelledby="date-label date-value"
                 aria-invalid={dateError}
                 aria-describedby={dateError ? "date-error" : undefined}
                 className={cn(
@@ -139,7 +131,7 @@ export function BookingForm({ offer }: { offer: Offer }) {
                   fieldClass,
                 )}
               >
-                <span className={cn("flex items-center gap-2.5 truncate", !date && "text-stone")}>
+                <span id="date-value" className={cn("flex items-center gap-2.5 truncate", !date && "text-stone")}>
                   <CalendarIcon aria-hidden className="size-[18px] shrink-0 text-stone" />
                   {date ? format(date, "PPP") : "Pick a date"}
                 </span>
@@ -234,20 +226,20 @@ export function BookingForm({ offer }: { offer: Offer }) {
         <div className="mt-1.5 border-t border-ink/10 pb-1 pt-5" aria-live="polite">
           <p className="mb-2 flex justify-between text-[15px] text-stone">
             <span>Price per person</span>
-            <span>{showPrice(pricePerPerson)}</span>
+            <span>{formatPrice(pricePerPerson)}</span>
           </p>
           <p className="mb-2 flex justify-between text-[15px] text-stone">
             <span>Participants</span>
             <span>× {participants}</span>
           </p>
-          {hasSoloSupplement && (
+          {isSolo && (
             <p className="mb-2 text-[13px] text-stone">
               Includes {formatPrice(siteConfig.pricing.soloSupplement)} solo traveler supplement
             </p>
           )}
           <p className="flex items-baseline justify-between text-lg font-semibold">
             <span>Total</span>
-            <span className="font-serif text-4xl font-normal">{showPrice(totalPrice)}</span>
+            <span className="font-serif text-4xl font-normal">{formatPrice(totalPrice)}</span>
           </p>
         </div>
 
