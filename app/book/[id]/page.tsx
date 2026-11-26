@@ -175,6 +175,7 @@ export default async function BookingPage({ params }: BookingPageProps) {
                 src={offer.image}
                 alt={offer.name}
                 fill
+                loading="eager"
                 fetchPriority="high"
                 sizes="(max-width: 1024px) 100vw, 840px"
                 className="object-cover"
